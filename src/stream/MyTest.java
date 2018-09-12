@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +17,10 @@ public class MyTest {
 	    readFile(list);
 	    Map<String,List<String>> map = new HashMap<String,List<String>>();
 	    initializeMap(map, list);
-	    ArrayList result = getListOfFirstLetter(map,"d");
+	    ArrayList<?> result = getListOfFirstLetter(map,"d");
 	    printList(result);
 	}
-	private static void readFile(List list) throws IOException{
+	private static void readFile(List<String> list) throws IOException{
 	    File file = new File("animal.txt");
 
 	    BufferedReader br;
@@ -40,21 +39,21 @@ public class MyTest {
 	    for (String s : list) {
 	    	String firstLetter = s.substring(0,1);
 	    	if (map.get(s.substring(1))!=null){
-	    		List subList = map.get(firstLetter);
+	    		List<String> subList = map.get(firstLetter);
 	    		subList.add(s);
 	    		//map.put(firstLetter,subList);
 	    	}else {
-	    		List subList = new ArrayList();
+	    		List<String> subList = new ArrayList<String>();
 	    		subList.add(s);
 	    		map.put(firstLetter,subList);
 	    	}
 	    }
 	}
-	private static ArrayList getListOfFirstLetter(Map map, String letter) {
-		return (ArrayList)map.get(letter);
+	private static ArrayList<?> getListOfFirstLetter(Map<String, List<String>> map, String letter) {
+		return (ArrayList<?>)map.get(letter);
 	 
 	}
-	private static void printList (ArrayList list) {
+	private static void printList (ArrayList<?> list) {
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
